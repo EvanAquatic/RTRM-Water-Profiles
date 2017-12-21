@@ -15,6 +15,8 @@ for(i in seq(1, nrow(RTRM))){
   RTRM[i,"RTRM_OUTPUT"] = RTRM[i+1,"RTRM_OUTPUT"] = ((RTRM[i+1,"Water_Density"] - RTRM[i,"Water_Density"])/(1-0.9999919))
 }
 
+RTRM$RTRM_OUTPUT2<-ifelse(RTRMRTRM_OUTPUT >=0 |RTRM$RTRM_OUTPUT<0, RTRM$RTRM_OUTPUT, 0)
+
 
 
 
