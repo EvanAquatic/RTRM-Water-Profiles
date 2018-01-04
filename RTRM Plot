@@ -21,10 +21,10 @@ RTRM
 
 
 
-#######General Plot
+#######General RTRM Plot for RTRMExampleProfile.csv
 library(ggplot2)
 
-RTRM<- read.csv("~/###DATALOCATION", header=TRUE, na.strings = "NA")
+RTRM<- read.csv("~/RTRMExampleProfile.csv", header=TRUE, na.strings = "NA")
 
 df<-data.frame(RTRM)
 
