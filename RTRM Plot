@@ -1,6 +1,6 @@
 #Function to calculate water density (mg/m^3) from water temperature (celsius)
 WaterDensityCalc <- function(x) { 
-  Density=(1000*(1-((Temperature+288.9414)/(508929.2*(Temperature+68.12963)))*(Temperature-3.9863)^2))/1000 #output is water density in mg/m^3
+  Density=(1000*(1-((Temperature+288.9414)/(508929.2*(Temperature+68.12963)))*(Temperature-3.9863)^2)/1000 #output is water density in mg/m^3
 }
 
 Depth=c(1,2,3,4,5)
@@ -15,10 +15,13 @@ for(i in seq(1, nrow(RTRM))){
   RTRM[i,"RTRM_OUTPUT"] = RTRM[i,"RTRM_OUTPUT"] = ((RTRM[i+1,"Water_Density"] - RTRM[i,"Water_Density"])/(1-0.9999919))
 }
 
+#1000*(1-((4+288.9414)/(508929.2*(4+68.12963)))*(4-3.9863)^2)/1000=1
+#1000*(1-((5+288.9414)/(508929.2*(5+68.12963)))*(5-3.9863)^2)/1000=0.9999919
+
+
 RTRM$RTRM_OUTPUT[RTRM$RTRM_OUTPUT<0]<-0
 
 RTRM
-
 
 
 #######General RTRM Plot for RTRMExampleProfile.csv
