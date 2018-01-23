@@ -1,0 +1,99 @@
+# RTRM-Water-Profiles
+R
+library(ggplot2)
+CulverInSitu<- read.csv('C:/Users/ekwityn/Desktop/Aquatic Data Culver Lake 1.17.2018-insitu.csv',header=TRUE, blank.lines.skip = TRUE,na.strings = "NA",stringsAsFactors=FALSE); 
+
+library(ggplot2)
+
+CulverInSitu$NewDate <- format(as.Date(CulverInSitu$Date, format="%m/%d/%Y"), "%Y/%m")
+CulverInSitu$MonthDay <- format(as.Date(CulverInSitu$Date, format="%m/%d/%Y"), "%m/%d")
+
+df<-subset(CulverInSitu, Waterbody.Name=="Culver Lake" & Sample.Location.ID=="Mid-Lake")
+dfpH<-subset(df, Surveyors=="Princeton Hydro")
+dfph17<-subset(dfpH, Year=="2017")
+
+CulverDisSitu<-merge(CulverInSitu, CulverDiscrete, by=c("Project.Number", "Date", "Sample.Location.ID","Sample.depth..m."))
+
+dates <- as.Date(df$Date, "%Y/%m/%d")
+
+g<-ggplot(df17, aes(x=Temperature..C., y =Sample.depth..m.))+
+  theme_bw() + 
+  geom_path(aes(linetype=Sample.Location.ID), ) + 
+ # stat_smooth()+
+  facet_wrap(~MonthDay, ncol=6)+
+ # facet_grid(Date~Year)+
+  labs(title='WATERBODY Temperature Profiles for ####') +
+  xlab("Temperature (C)")+
+  ylab("Depth (m)")+
+  scale_y_reverse() +
+  scale_x_continuous(limits=c(0,30), expand =c(0,0))+
+  theme_bw()+
+  theme(strip.text = element_text(size=6.5, lineheight=0.1, hjust=0.5),
+        axis.text.y = element_text(size=8),
+        axis.text.x = element_text(size=8))+
+  theme(axis.text.x=element_text(colour="black"))+
+  theme(axis.text.y=element_text(colour="black"))
+
+ggplot(df17, aes(x=Dissolved.Oxygen..mg.L., y =Sample.depth..m.))+
+  theme_bw() + 
+  geom_path(aes(linetype=Sample.Location.ID), ) + 
+  # stat_smooth()+
+  facet_wrap(~Monthday, ncol=6)+
+  # facet_grid(Date~Year)+
+  labs(title='Culver Lake Dissolved Oxygen Profiles for 2017') +
+  xlab("Dissolved Oxygen (mg/L)")+
+  ylab("Depth (m)")+
+  scale_y_reverse() +
+  scale_x_continuous(limits=c(-0.3,12), expand =c(0,0))+
+  theme_bw()+
+  theme(strip.text = element_text(size=6.5, lineheight=0.1, hjust=0.5),
+        axis.text.y = element_text(size=8),
+        axis.text.x = element_text(size=8))+
+  theme(axis.text.x=element_text(colour="black"))+
+  theme(axis.text.y=element_text(colour="black"))
+
+
+ggplot(df17, aes(x=pH..STU., y =Sample.depth..m., color=Sample.Location.ID))+
+  theme_bw() + 
+  geom_path(aes(linetype=Sample.Location.ID), ) + 
+  # stat_smooth()+
+  facet_wrap(~Monthday, ncol=6)+
+  # facet_grid(Date~Year)+
+  labs(title='Waterbody pH Profiles for 2017') +
+  xlab("ph (STU)")+
+  ylab("Depth (m)")+
+  scale_y_reverse() +
+  scale_x_continuous(limits=c(-0.3,12), expand =c(0,0))+
+  theme_bw()+
+  theme(strip.text = element_text(size=6.5, lineheight=0.1, hjust=0.5),
+        axis.text.y = element_text(size=8),
+        axis.text.x = element_text(size=8))+
+  theme(axis.text.x=element_text(colour="black"))+
+  theme(axis.text.y=element_text(colour="black"))
+
+
+OrderedYear1<-factor(c(1991,1992,1993,1994,1995,1996,1997,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017))
+ggplot(data = TP, aes(x = Year, y = Mean.Tp, color=Station)) +
+  geom_smooth(span=0.3,se=TRUE ) +
+  #facet_wrap(~Sample.Depth.Name)+
+  #ylim(-.1,.)+
+  labs(title='Culver Lake Mid-Lake Mean Total Phosphorus Concentrations 1990-2017') +
+  xlab("")+
+  ylab("Mean Total Phosphorus (mg/L)")+
+  theme_classic()+
+  scale_y_continuous(limits=c(0,.4), expand =c(0,0))+
+  theme(axis.text.x=element_text(colour="black"))+
+  theme(axis.text.y=element_text(colour="black"))+
+  scale_color_brewer(palette="Set1")
+
+OrderedYear<-factor(c(1993,1994,1995,1996,1997,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017))
+ggplot(Secchi, aes(x=OrderedYear, y=Secchi.ft)) + 
+  geom_bar(stat="identity", fill="steelblue4", position=position_dodge()) +
+  geom_errorbar(aes(ymin=Secchi.ft-Std.ft, ymax=Secchi.ft+Std.ft), width=.2,position=position_dodge(.9))+
+   theme_classic()+
+  scale_y_continuous(limits=c(0,12), expand =c(0,0), breaks=c(0,1,2,3,4,5,6,7,8,9,10,11,12))+ #breaks=c(0,0.5,1.0,1.5,2.0,2.5,3.0,3.5)
+  labs(title='Culver Lake Mid-Lake Mean Secchi Depths') +
+  xlab("")+
+  ylab("Secchi Depth (feet)")+
+  theme(axis.text.x=element_text(colour="black"))+
+ theme(axis.text.y=element_text(colour="black"))
