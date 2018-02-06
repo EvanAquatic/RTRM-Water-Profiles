@@ -1,6 +1,6 @@
 #Function to calculate water density (mg/m^3) from water temperature (celsius)
 WaterDensityCalc <- function(x) { 
-  Density=(1000*(1-((Temperature+288.9414)/(508929.2*(Temperature+68.12963)))*(Temperature-3.9863)^2)/1000 #output is water density in mg/m^3
+  Density=(1000*(1-((Temperature+288.9414)/(508929.2*(Temperature+68.12963)))*(Temperature-3.9863)^2)/1000) #output is water density in mg/m^3
 }
 
 Depth=c(1,2,3,4,5)
