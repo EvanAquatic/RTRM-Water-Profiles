@@ -9,7 +9,7 @@ Water_Density<-WaterDensityCalc(Temperature) ###Calculating water density from t
 
 RTRM<-data.frame(Depth, Temperature, Water_Density) ###Creating dataframe with outputs
 
-##Calculate RTRM using a simple loop
+##Calculate RTRM using a loop
 RTRM$RTRM_OUTPUT= NA
 for(i in seq(1, nrow(RTRM))){
   RTRM[i,"RTRM_OUTPUT"] = RTRM[i,"RTRM_OUTPUT"] = ((RTRM[i+1,"Water_Density"] - RTRM[i,"Water_Density"])/(1-0.9999919))
