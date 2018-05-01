@@ -20,7 +20,8 @@ for(i in seq(1, nrow(RTRM))){
 #1000*(1-((4+288.9414)/(508929.2*(4+68.12963)))*(4-3.9863)^2)/1000=1
 #1000*(1-((5+288.9414)/(508929.2*(5+68.12963)))*(5-3.9863)^2)/1000=0.9999919
 
-RTRM$RTRM_OUTPUT[RTRM$RTRM_OUTPUT<0]<-0 #Removing negative values
+RTRM$RTRM_OUTPUT[RTRM$RTRM_OUTPUT<0]<-0 #Removing negative values and changing to zero
+RTRM$RTRM_OUTPUT[is.na(RTRM$RTRM_OUTPUT)] <- 0 #Removing na values and changing to zero
 RTRM
 
 #######General Plots and Figures
