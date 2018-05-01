@@ -59,14 +59,12 @@ g<-ggplot(newdf, aes(x=Output, y =Depth, color=Legend))+
         legend.position = "top", legend.background = element_rect(color = "black", 
          size = .1), legend.direction = "horizontal")
 
-
 ###################
 #Creating new dataframes to plot Dissolved Oxygen, pH, % Dissolved Oxygen, etc. 
 df2<-data.frame(Profile$Sampling.Location, Profile$Sample.Depth, Profile$Dissolved.Oxygen)
 names(df2)<-c("SampleLocation", "Depth", "Dissolved Oxygen") #New datadrame output with new header names; length=lt and weight=wt
 newdf2<- melt(df2, id = c("SampleLocation","Depth"))
 names(newdf2)<-c("SampleLocation", "Depth", "Legend", "Output") #New datadrame output with new header names; length=lt and weight=wt
-
 
 ###Dissolved Oxygen Profile Plot Outputs
 g<-ggplot(newdf2, aes(x=Output, y =Depth, color=Legend))+
@@ -85,5 +83,3 @@ g<-ggplot(newdf2, aes(x=Output, y =Depth, color=Legend))+
         panel.spacing = unit(1, 'lines'), 
         legend.position = "top", legend.background = element_rect(color = "black", 
         size = .5), legend.direction = "horizontal")
-
-
