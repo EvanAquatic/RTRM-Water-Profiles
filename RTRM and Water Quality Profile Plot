@@ -7,7 +7,7 @@ WaterDensityCalc <- function(x) {
 
 Depth=Profile$Sample.Depth 
 Temperature=Profile$Temperature
-Water_Density<-WaterDensityCalc(Temperature) ###Calculating water density from the definied function  
+Water_Density<-WaterDensityCalc(Temperature) ###Calculating water density from the defined function  
 
 RTRM<-data.frame(Profile$Sampling.Location, Depth, Temperature, Water_Density) ###Creating dataframe with outputs
 
